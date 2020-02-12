@@ -20,7 +20,7 @@ def min_vertex(mk, tg, size):
 
 def put(actual, rt):
     for i in range(len(graph)):
-        if (graph[actual][i] != -1):
+        if (graph[actual][i] != 0):
             if (tags[i] == 'inf'):
                 tags[i] = tags[actual] + graph[actual][i]
                 rt[i] = actual
@@ -42,6 +42,11 @@ def way (rt, nd, st, size):
     w.reverse()
     return w        #нахождения кратчайшего пути
 
+def graphOutput(graph):
+    for i in range(len(graph)):
+        print(graph[i])
+    return              #вывод графа
+
 '''
 graph = [
     [-1, 10, 30, -1, -1, -1, 10, 30, -1, -1],
@@ -57,17 +62,19 @@ graph = [
     ]     #таблица смежности графов
 '''
 
+####################                            ЗАДАНИЕ 1               ####################
+
 graph = [
-    [-1, -1, -1, 4, -1, 5, -1, 2, 1, -1],
-    [5, -1, -1, -1, -1, -1, -1, 2, -1, 5], 
-    [-1, 4, -1, 2, -1, -1, 2, -1, 1, 1], 
-    [4, -1, 3, 4, -1, -1, -1, -1, -1, -1], 
-    [-1, -1, -1, -1, 5, 3, -1, -1, -1, -1], 
-    [-1, -1, -1, -1, -1, 5, -1, -1, 1, -1], 
-    [-1, -1, -1, 3, -1, -1, 3, 3, -1, -1], 
-    [-1, 4, -1, -1, -1, -1, -1, 2, -1, -1], 
-    [4, -1, 3, 5, -1, -1, -1, 2, -1, -1], 
-    [-1, 5, 2, 1, 5, 2, -1, -1, -1, 4]
+    [0, 2, 0, 4, 0, 5, 0, 2, 1, 0], 
+    [5, 0, 0, 0, 0, 3, 0, 2, 0, 5], 
+    [0, 0, 0, 2, 0, 0, 2, 0, 1, 1], 
+    [4, 0, 2, 0, 0, 0, 0, 0, 0, 0], 
+    [0, 4, 5, 0, 0, 3, 0, 9, 8, 0], 
+    [5, 0, 0, 0, 0, 0, 0, 0, 1, 0], 
+    [0, 0, 2, 0, 5, 0, 0, 3, 0, 0], 
+    [2, 2, 0, 0, 0, 0, 3, 0, 7, 0], 
+    [1, 0, 1, 0, 0, 1, 0, 0, 0, 0], 
+    [0, 5, 1, 0, 6, 0, 0, 0, 0, 0], 
     ]
 
 '''
@@ -82,9 +89,8 @@ for i in range(qu):
     gdd.clear
    '''
    
-print('Матрица расстояний графа: ')
-for i in range(len(graph)):
-    print(graph[i])
+print('Задание 1\nМатрица расстояний ориентированного графа: ')
+graphOutput(graph)
 tags = ['inf']*len(graph)   #отмечаем посещенные вершины
 mark = [0]*len(graph)       #посещенные вершины
 
@@ -113,3 +119,15 @@ if (way(route, end, start, len(graph)) == 'no route'):
     print(way(route, end, start, len(graph)))
 else:
     print('Кратчайший путь от вершины ', start, ' до ', end, 'равен ', tags[end],' :', ' -> '.join((str(i) for i in way(route, end, start, len(graph)))))
+
+####################                            ЗАДАНИЕ 2               ####################
+
+print('\nЗадание 2\nМатрица расстояний неориентированного графа: ')
+for i in range(len(graph)):
+    for j in range(len(graph)):
+        if graph[j][i] < graph[i][j]:
+            graph[j][i] = graph[i][j]
+        else:
+            graph[i][j] = graph[j][i]
+graphOutput(graph)
+
