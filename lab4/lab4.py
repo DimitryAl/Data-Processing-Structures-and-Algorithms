@@ -42,7 +42,7 @@ def way (rt, nd, st, size):
     w.reverse()
     return w        #нахождения кратчайшего пути
 
-
+'''
 graph = [
     [-1, 10, 30, -1, -1, -1, 10, 30, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
@@ -55,6 +55,20 @@ graph = [
     [-1, 40, 20, -1, -1, -1, 40, 20, -1, -1],
     [10, -1, 10, -1, -1, 10, -1, 10, -1, -1]
     ]     #таблица смежности графов
+'''
+
+graph = [
+    [-1, -1, -1, 4, -1, 5, -1, 2, 1, -1],
+    [5, -1, -1, -1, -1, -1, -1, 2, -1, 5], 
+    [-1, 4, -1, 2, -1, -1, 2, -1, 1, 1], 
+    [4, -1, 3, 4, -1, -1, -1, -1, -1, -1], 
+    [-1, -1, -1, -1, 5, 3, -1, -1, -1, -1], 
+    [-1, -1, -1, -1, -1, 5, -1, -1, 1, -1], 
+    [-1, -1, -1, 3, -1, -1, 3, 3, -1, -1], 
+    [-1, 4, -1, -1, -1, -1, -1, 2, -1, -1], 
+    [4, -1, 3, 5, -1, -1, -1, 2, -1, -1], 
+    [-1, 5, 2, 1, 5, 2, -1, -1, -1, 4]
+    ]
 
 '''
 import random
@@ -66,12 +80,13 @@ for i in range(qu):
         gdd.append(random.randint(-1, 5))
     graph.append(gdd)
     gdd.clear
-    '''
+   '''
+   
 print('Матрица расстояний графа: ')
 for i in range(len(graph)):
     print(graph[i])
-tags = ['inf']*len(graph)
-mark = [0]*len(graph)#посещенные вершины
+tags = ['inf']*len(graph)   #отмечаем посещенные вершины
+mark = [0]*len(graph)       #посещенные вершины
 
 start = int(input('Введите начальную вершину: '))
 if (start < 0 or start >= len(graph)):
@@ -93,4 +108,8 @@ for i in range(len(graph)):
     if (current == -1):
         
         break
-print('Кратчайший путь от вершины ', start, ' до ', end, 'равен ', tags[end],' :', ' -> '.join((str(i) for i in way(route, end, start, len(graph)))))
+#s = way(route, end, start, len(graph))
+if (way(route, end, start, len(graph)) == 'no route'):
+    print(way(route, end, start, len(graph)))
+else:
+    print('Кратчайший путь от вершины ', start, ' до ', end, 'равен ', tags[end],' :', ' -> '.join((str(i) for i in way(route, end, start, len(graph)))))
